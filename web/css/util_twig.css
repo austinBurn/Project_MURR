@@ -1,0 +1,55 @@
+/* ADD/NEW FORM */
+td .pencil {
+    opacity: 1 !important;
+}
+
+.ui.search {
+    margin-bottom: 1rem;
+}
+
+td form {
+    display: inline-block;
+}
+
+#appbundle_truck_Add,
+#appbundle_routepickup_Add {
+    margin: 0 -1em 0 1em;
+}
+
+.truckList, .truckAdd,
+/*.containerList, .containerAdd*/ {
+    margin-bottom: 1rem;
+}
+
+.containerList {
+    margin-top: 1rem;
+}
+
+.truckAdd .inline.fields,
+.containerAdd .inline.fields {
+    margin-bottom: 0px !important;
+}
+
+#filteredTruckList {
+    display: table-cell;
+}
+
+.route_pickups {
+    display: table;
+}
+
+/**MOBILE**/
+@media only screen and (max-width: 767px) {
+    /* ADD/NEW FORM */
+    .truckAdd tr,
+    .containerAdd tr {
+        display: grid;
+    }
+
+    #appbundle_truck_Add,
+    #appbundle_routepickup_Add {
+        margin: 1em -1em 0 0;
+    }
+
+    /* THE LIST MIGHT NEED BETTER MOBILE STYLES*/
+}

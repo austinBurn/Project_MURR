@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}MURR{% endblock %}</title>    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+        <link href="{{ asset('css/base_twig.css') }}" type="text/css" rel="stylesheet" />
+
+        
+        {% block stylesheets %}
+        {% endblock %}
+        
+        <link rel="icon" type="image/x-icon" href="{{ asset('cosmo.ico') }}" />
+        <!-- Font Awesome Icon pack-->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+        <!-- Import jquery and semantic ui from a CDN
+             We may want to backup links that are hosted by the project, but this works for now.
+        -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/sidebar.min.js"></script>
+    
+        <script type="text/javascript" src="{{ asset('JavaScript/base_twig.js') }}"></script>
+    </head>
+    <body>
+        <!-- Encase the body/content of each page in whatever template you think is nice -->
+        <div class="ui vertical inverted left sidebar menu" id="sideNav">
+            <a class="item" id="homePage" href="{{ path('homepage') }}">Home</a>
+            <a class="item" id="communicationsPage" href="{{ path('communication_search')}}">Communications</a>
+            <a class="item" id="contactsPage" href="{{ path('contact_search') }}">Contacts</a>
+            <a class="item" id="containersPage" href="{{ path('container_search') }}">Containers</a>
+            <a class="item" id="propertiesPage" href="{{ path('property_search') }}">Properties</a>
+            <a class="item" id="routesPage" href="{{path('route_search')}}">Routes</a>
+            <a class="item" id="trucksPage" href="{{ path('truck_util') }}">Trucks</a>
+        </div>
+        <div id="pageContent" class="pusher">
+			<!-- Header for the page -->
+			<div class="ui masthead vertical center aligned segment" id="mainHeader">
+				<div class="ui container">
+					<h1 class="ui inverted header">
+                        <div id="headerLogoContainer">
+                            <img id="headerLogo" src="{{asset("img/cosmoindustries_icon.png")}}" alt="Cosmo Logo" />
+						</div>
+                        <div class="content">
+							Cosmo M.U.R.R. <i class="recycle icon"></i>
+						</div>
+					</h1>
+				</div>
+			</div>
+
+			<!-- Horizontal Menu bar - NOTE: This bar is only sticky on mobile -->
+			<div class="ui icon sticky menu" id="horizontalNav">
+				<div class="ui container">
+					<!-- A hamburger button that only shows up on mobile -->
+					<a class="item" id="openMenu">
+						<i class="bars icon"></i>
+					</a>
+				</div>
+			</div>
+
+			<!-- The actual contents of the page -->
+			<div id="contentSeparator">
+				<div class="ui container">
+				{% block body %}{% endblock %}
+				</div>
+			</div>
+        </div>
+		{% block javascripts %}
+		{% endblock %}
+    </body>
+</html>

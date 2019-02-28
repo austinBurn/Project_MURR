@@ -1,0 +1,30 @@
+imports:
+    - { resource: config_dev.yml }
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        charset: UTF8
+        #memory: true
+        path: '%kernel.project_dir%/app/sqlite_test.db'
+    
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+swiftmailer:
+    disable_delivery: true
+
+
+#enable http basic authentication, but ONLY FOR THE TESTS.
+security:
+    firewalls:
+        main:
+            http_basic: ~

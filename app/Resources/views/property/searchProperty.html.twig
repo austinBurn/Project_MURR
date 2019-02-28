@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Property Search | M.U.R.R.{% endblock %}
+
+{% block javascripts %}
+{# include Knockout to make the search script works #}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    
+{# include the search javasript #}
+<script type="text/javascript" src="{{ asset('JavaScript/Search.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+{# magic invisible div that allows us to pass information to the search script #}
+<div class="js-jsonpage" data-jsonpage="{{ path('property_jsonsearch_empty') }}"></div>
+<div class="js-isPopup" data-ispopup="{{isPopup}}"></div>
+<h2>
+    Property Search
+    <a href="{{ path('property_add') }}" class="ui icon button green"><i class="plus icon" id="newProperty"></i></a>
+</h2>
+
+<div class="ui search">
+    <input type="text" id="searchBox" class="prompt" maxlength="100" placeholder="Search..." />
+    <i class="times circle icon" id="btnClear"></i>
+    <div class="results"></div>
+</div>
+
+<div id="message"></div>
+<table hidden class="ui selectable celled table">
+    <thead>
+        <tr>
+            <th>Site ID</th>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Structure Id</th>
+            <th>Units</th>
+            <th>Neighbourhood</th>
+          {#<th>Address??</th>#}
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: results">
+        <tr data-bind="attr:{'data-id': id}">
+            <td data-bind="text: siteId"></td>
+            <td data-bind="text: propertyName"></td>
+            <td data-bind="text: propertyType"></td>
+            <td data-bind="text: propertyStatus"></td>
+            <td data-bind="text: structureId"></td>
+            <td data-bind="text: numUnits"></td>
+            <td data-bind="text: neighbourhoodName"></td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

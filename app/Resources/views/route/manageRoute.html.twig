@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Route | M.U.R.R.{% endblock %}
+
+{% block stylesheets %}
+<link href="{{ asset('css/util_twig.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}  
+
+{% block javascripts %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+<!-- Link in custom script that uses the delete prompts-->
+<script type="text/javascript" src="{{ asset('JavaScript/RemoveModal.js') }}"></script>
+
+{#<div class="js-jsonpage" data-jsonpage="{{ path('property_jsonsearch_empty') }}"></div>
+<div class="js-inittrucks" data-inittrucks="{{inittrucks}}"></div>#}
+
+{# include the filter javasript #}
+<script type="text/javascript" src="{{ asset('JavaScript/RouteManagerUtils.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div>
+    {#{% if propertyId == "not_specified"%}
+    <h2>No property specified</h2>
+    {% elseif property is empty %}
+    <h2>The specified property could not be found</h2>
+    {% else %}#}
+
+
+	{% if invalid_id_error %}
+    <h2>Route does not exist</h2>
+    {% else %}
+
+	<div class="column containerAdd">
+		<h1 class="ui header left attached top">Add Container to Route '{{ route.routeId }}'</h1>
+		<div class="ui bottom attached segment">
+			{{ form_start(form) }}
+
+			{{ form_errors(form) }}
+			<table>
+				<tbody>
+					<tr>
+						{{ form_errors(form.container) }}
+						<td>
+							<div class="inline fields">
+								{{ form_label(form.container)  }}
+								{{ form_widget(form.container) }}
+							</div>
+						</td>
+
+						{{ form_errors(form.pickupOrder) }}
+						<td>
+							<div class="inline fields">
+								{{ form_label(form.pickupOrder)  }}
+								{{ form_widget(form.pickupOrder) }}						    
+							</div>
+						</td>
+
+						<td>
+							<div class="inline fields">
+								{{ form_row(form.Add) }}
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			{{ form_end(form) }}
+		</div>
+	</div>
+
+	<div class="column containerList">
+		<h1 class="ui header left attached top">Container List</h1>
+		<div class="ui bottom attached segment">
+			<table class="route_pickups ui celled table">
+				<thead>
+					<tr>
+						<th>Pickup Order</th>
+						<th>Container Serial</th>
+						<th>Property</th>
+						{#<th>Truck</th>#}
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for rp in route.pickups %}
+						<tr>
+							<td>{{ rp.pickupOrder }}</td>
+							<td>{{ rp.container.containerSerial }}</td>
+							<td>{{ rp.container.property }}</td>
+							{#<td>{% if rp.truck.truckId is defined %}{{ rp.truck.truckId }}{% endif %}</td>#}
+							<td>
+								<form id="rmf{{rp.id}}" name="appbundle_removeContainer" data-id="{{rp.id}}" method="post" action="{{ path('route_pickup_removal', { 'id': rp.id })}}" data-message="'Are you sure you want to remove Truck \''+truckId+'\''">
+									<button id="rmb{{rp.id}}" type="button" class="ui icon button rmb removeButton red">
+										<i class="close icon"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+    {% endif %}
+</div>
+{% endblock %}

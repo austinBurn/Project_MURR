@@ -1,0 +1,10 @@
+.ui.search.template.dropdown.selection .menu {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    max-height: 8rem !important;
+}
+
+.templatePickups {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
